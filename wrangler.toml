@@ -1,0 +1,12 @@
+name = "my-next-app"
+main = ".open-next/worker.js"
+compatibility_date = "2024-09-03"
+
+# Optional: environment variables
+[vars]
+NODE_ENV = "production"
+
+# 👇 The required binding for OpenNext incremental cache
+[[r2_buckets]]
+binding = "NEXT_INC_CACHE_R2_BUCKET"
+bucket_name = "next-inc-cache"
