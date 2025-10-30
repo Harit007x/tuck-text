@@ -1,7 +1,7 @@
 // app/app/page.tsx
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -32,7 +32,6 @@ const Page = () => {
     null
   );
   const [textSets, setTextSets] = useState<Array<any>>([]);
-  const [isPayDialogOpen, setIsPayDialogOpen] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -175,7 +174,7 @@ const Page = () => {
           currentX = -totalWidth / 2;
 
           // Draw each character with spacing
-          chars.forEach((char: any, i: any) => {
+          chars.forEach((char: any) => {
             const charWidth = ctx.measureText(char).width;
             ctx.fillText(char, currentX + charWidth / 2, 0);
             currentX += charWidth + textSet.letterSpacing;
@@ -240,7 +239,6 @@ const Page = () => {
                     <Button
                       variant="link"
                       className="p-0 h-auto text-sm text-primary hover:underline"
-                      onClick={() => setIsPayDialogOpen(true)}
                     >
                       Upgrade
                     </Button>
@@ -275,7 +273,7 @@ const Page = () => {
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => setIsPayDialogOpen(true)}>
+                <DropdownMenuItem>
                   <button></button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -302,7 +300,6 @@ const Page = () => {
                       <Button
                         variant="link"
                         className="p-0 h-auto text-sm text-primary hover:underline"
-                        onClick={() => setIsPayDialogOpen(true)}
                       >
                         Upgrade
                       </Button>
@@ -315,9 +312,8 @@ const Page = () => {
                   <Image
                     src={selectedImage}
                     alt="Uploaded"
-                    layout="fill"
-                    objectFit="contain"
-                    objectPosition="center"
+                    fill
+                    style={{ objectFit: "contain", objectPosition: "center" }}
                   />
                 ) : (
                   <span className="flex items-center w-full gap-2">
@@ -356,10 +352,9 @@ const Page = () => {
                   <Image
                     src={removedBgImageUrl}
                     alt="Removed bg"
-                    layout="fill"
-                    objectFit="contain"
-                    objectPosition="center"
+                    fill
                     className="absolute top-0 left-0 w-full h-full"
+                    style={{ objectFit: "contain", objectPosition: "center" }}
                   />
                 )}
               </div>
